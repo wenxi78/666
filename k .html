@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Gradient Cube</title>
+    <style>
+        /* 使 body 成为 3D 容器并居中 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            /* 父元素设置透视，产生景深 */
+            perspective: 1000px;
+        }
+
+        /* 立方体父容器 */
+        .cube {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            /* 关键：保持 3D 空间 */
+            transform-style: preserve-3d;
+            /* 手动旋转整体角度，方便观察 */
+            transform: rotateX(20deg) rotateY(30deg);
+        }
+
+        /* 立方体的单个面通用样式 */
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        /* 1. 正面 (Front) */
+        .face.front  {
+            /* 沿 Z 轴向外移动 */
+            transform: translateZ(100px);
+            background: linear-gradient(to right, #ff6b6b, #feca57);
+        }
+
+        /* 2. 背面 (Back) */
+        .face.back {
+            /* 沿 Z 轴向内移动 */
+            transform: rotateY(180deg) translateZ(100px);
+            background: linear-gradient(to right, #48dbfb, #0abde3);
+        }
+
+        /* 3. 右侧面 (Right) —— 题目重点要求的渐变侧边 */
+        .face.right {
+            width: 200px;
+            height: 200px;
+            /* 先沿 Y 轴旋转 90 度，再沿 Z 轴移动 */
+            transform: rotateY(90deg) translateZ(100px);
+            /* 题目要求：使用 linear-gradient 做侧边渐变 */
+            background: linear-gradient(to bottom, #6c5ce7, #a29bfe);
+        }
+
+        /* 4. 左侧面 (Left) */
+        .face.left {
+            width: 200px;
+            height: 200px;
+            transform: rotateY(-90deg) translateZ(100px);
+            background: linear-gradient(to bottom, #fd79a8, #e84393);
+        }
+
+        /* 5. 顶面 (Top) */
+        .face.top {
+            height: 200px;
+            width: 200px;
+            /* 先沿 X 轴旋转 -90 度，再沿 Z 轴移动 */
+            transform: rotateX(-90deg) translateZ(100px);
+            background: linear-gradient(to right, #00b894, #55efc4);
+        }
+
+        /* 6. 底面 (Bottom) */
+        .face.bottom {
+            height: 200px;
+            width: 200px;
+            transform: rotateX(90deg) translateZ(100px);
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="cube">
+        <div class="face front">Front</div>
+        <div class="face back">Back</div>
+        <div class="face right">Right</div>
+        <div class="face left">Left</div>
+        <div class="face top">Top</div>
+        <div class="face bottom">Bottom</div>
+    </div>
+</body>
+</html>
